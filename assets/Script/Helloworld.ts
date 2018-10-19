@@ -1,16 +1,16 @@
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
+import Global from './Global';
 
 @ccclass
 export default class Helloworld extends cc.Component {
+  @property
+  text: string = 'hello';
 
-    @property(cc.Label)
-    label: cc.Label = null;
-
-    @property
-    text: string = 'hello';
-
-    start () {
-        // init logic
-        this.label.string = this.text;
-    }
+  onLoad() {
+    Global.backNode = this.node;
+  }
+  start() {
+    // init logic
+    console.log(this);
+  }
 }
