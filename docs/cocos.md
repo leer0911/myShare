@@ -469,7 +469,10 @@ cocos creator 提供的组件有：碰撞组件，物理组件，渲染组件，
 
 --
 
-## 坐标系和节点变换属性
+## 坐标系
+
+Note:
+cocos creator 下的坐标系统跟浏览器存在差别
 
 --
 
@@ -493,12 +496,8 @@ cocos creator 提供的组件有：碰撞组件，物理组件，渲染组件，
 
 ![](./img/Coordinate.png)
 
---
-
+Note:
 世界坐标系也叫做绝对坐标系，在 Cocos Creator 游戏开发中表示场景空间内的统一坐标体系，「世界」就用来表示我们的游戏场景。
-
---
-
 本地坐标系也叫相对坐标系，是和节点相关联的坐标系。每个节点都有独立的坐标系，当节点移动或改变方向时，和该节点关联的坐标系将随之移动或改变方向。
 
 --
@@ -507,53 +506,43 @@ Cocos Creator 中的 节点（Node） 之间可以有父子关系的层级结构
 
 --
 
-### 锚点（Anchor）
+## 锚点（Anchor）
 
 - 锚点（Anchor） 是节点的另一个重要属性，它决定了节点以自身约束框中的哪一个点作为整个节点的位置。我们选中节点后看到变换工具出现的位置就是节点的锚点位置。
 
 - 锚点位置确定后，所有子节点就会以 锚点所在位置 作为坐标系原点，注意这个行为和 cocos2d-x 引擎中的默认行为不同，是 Cocos Creator 坐标系的特色！
 
---
-
-### 变换属性
-
-- 锚点（Anchor）
-
-- 位置（Position）
-
-- 旋转（Rotation）
-
-- 缩放（Scale）
+Note:
+结合 `transform-origin` 来理解比较好
 
 --
 
-## 管理节点层级和显示顺序
+## 节点层级和显示顺序
 
---
-
+Note:
 当场景中的元素越来越多时，我们就需要通过节点层级来将节点按照逻辑功能归类，并按需要排列他们的显示顺序。
 
 --
 
 ### 节点树
 
-通过层级管理器或运行时脚本的操作，建立的节点之间的完整逻辑关系，就叫做节点树。
-
---
-
 ![](./img/2dx-scene.png)
 ![](./img/2dx-node-tree.png)
+
+Note:
+通过层级管理器或运行时脚本的操作，建立的节点之间的完整逻辑关系，就叫做节点树。
 
 --
 
 ### 节点树有什么用?
 
+![](./img/player_breakdown.png)
+
+Note:
+比如我们要创建一个角色，有网页开发经验的应该可以理解左边显示的节点关系。
+
 - 管理节点逻辑关系
 - 管理节点渲染顺序
-
---
-
-![](./img/player_breakdown.png)
 
 --
 
@@ -567,11 +556,38 @@ Cocos Creator 中的 节点（Node） 之间可以有父子关系的层级结构
 
 --
 
-## 访问节点和组件
+## 生命周期回调
+
+- onLoad
+- start
+- update
+- lateUpdate
+- onDestroy
+- onEnable
+- onDisable
+
+## 常用脚本
 
 --
 
 ### 节点
+
+```ts
+@ccclass
+export default class Child extends Parent {
+  @property(cc.Node)
+  node: cc.Node = null;
+
+  // onLoad () {}
+  start() {
+    this.node;
+  }
+
+  // update (dt) {}
+}
+```
+
+Note:
 
 - 获得组件所在的节点很简单，只要在组件方法里访问 `this.node` 变量
 
@@ -579,43 +595,28 @@ Cocos Creator 中的 节点（Node） 之间可以有父子关系的层级结构
 
 --
 
-### 组件
-
-- 你会经常需要获得同一个节点上的其它组件，这就要用到 getComponent 这个 API，它会帮你查找你要的组件。
-
-- 利用属性检查器设置组件 (不需要再自己调用 getComponent)
-
---
-
-### 运行时动态获取其它对象
-
-- 查找子节点 `this.node.children`，或 `this.node.getChildByName("Cannon 01");`
-
-- 如果子节点的层次较深，你还可以使用 `cc.find`
-
---
-
-### 访问已有变量里的值
-
-- 通过全局变量访问
-
-- 通过模块访问
-
---
-
-## 常用节点和组件接口
-
-- 激活/关闭节点
-
-- 更改节点的父节点
-
-- 索引节点的子节点
-
-- 更改节点的变换
-
---
-
 ## 创建和销毁节点
+
+```ts
+@ccclass
+export default class Child extends Parent {
+  @property(cc.Prefab)
+  prefab: cc.Prefab = null;
+
+  // onLoad () {}
+  start() {
+    const node = new cc.Node();
+    const copyNode = cc.instantiate(node);
+    const prefabNode = cc.instantiate(this.prefab);
+    node.destroy();
+  }
+
+  // update (dt) {}
+}
+```
+
+Note:
+这些创建出来的节点，必须加入场景中才有效果。
 
 - 通过 `new cc.Node()` 并将它加入到场景中，可以实现整个创建过程。
 
@@ -627,47 +628,127 @@ Cocos Creator 中的 节点（Node） 之间可以有父子关系的层级结构
 
 --
 
-## 生命周期回调
+### 运行时动态获取其它对象
 
-- onLoad
-- start
-- update
-- lateUpdate
-- onDestroy
-- onEnable
-- onDisable
+```ts
+import script from 'script';
+
+@ccclass
+export default class Child extends Parent {
+  @property(script)
+  comp: script = null;
+
+  // onLoad () {}
+  start() {
+    console.log(this.node.children);
+    console.log(this.node.getChildByName('Cannon 01'));
+    console.log(cc.find('Canvas/Home'));
+  }
+
+  // update (dt) {}
+}
+```
+
+Note:
+
+- 查找子节点 `this.node.children`，或 `this.node.getChildByName("Cannon 01");`
+
+- 如果子节点的层次较深，你还可以使用 `cc.find`
+
+--
+
+### 组件
+
+```ts
+import script from 'script';
+
+@ccclass
+export default class Child extends Parent {
+  @property(script)
+  comp: script = null;
+
+  // onLoad () {}
+  start() {
+    this.node.getComponent('ScriptName');
+  }
+
+  // update (dt) {}
+}
+```
+
+Note:
+
+- `getComponent` 这个 API，它会帮你查找你要的组件。
+
+- 利用属性检查器设置组件 (不需要再自己调用 getComponent)
 
 --
 
 ## 加载和切换场景
 
-- 通过常驻节点进行场景资源管理和参数传递，`cc.game.addPersistRootNode(myNode)`;
+```Ts
+//创建常驻节点，用于多场景情况下资源和参数传递。
+cc.game.addPersistRootNode(myNode)
 
-- 引擎同时只会运行一个场景，当切换场景时，默认会将场景内所有节点和其他实例销毁。
+// 场景加载回调
+cc.director.loadScene("MyScene", onSceneLaunched);
 
-- 场景加载回调 `cc.director.loadScene("MyScene", onSceneLaunched);`
-
-- 预加载场景
-
-```js
+// 预加载场景
 cc.director.preloadScene('table', function() {
   cc.log('Next scene preloaded');
 });
 ```
 
+Note:
+引擎同时只会运行一个场景，当切换场景时，默认会将场景内所有节点和其他实例销毁。
+
 --
 
 ## 动态加载资源
 
-动态加载资源要注意两点，一是所有需要通过脚本动态加载的资源，都必须放置在 resources 文件夹或它的子文件夹下。resources 需要在 assets 文件夹中手工创建，并且必须位于 assets 的根目录
+```ts
+// 加载 Prefab
+cc.loader.loadRes('test assets/prefab', (err, prefab) {
+  var newNode = cc.instantiate(prefab);
+  cc.director.getScene().addChild(newNode);
+});
+
+// 加载 AnimationClip
+cc.loader.loadRes('test assets/anim', (err, clip)=> {
+  self.node.getComponent(cc.Animation).addClip(clip, 'anim');
+});
+```
+
+--
 
 ![](./img/resources-file-tree.png)
+
+Note:
+动态加载资源要注意两点，一是所有需要通过脚本动态加载的资源，都必须放置在 resources 文件夹或它的子文件夹下。resources 需要在 assets 文件夹中手工创建，并且必须位于 assets 的根目录
 
 --
 
 ## 监听和发射事件
 
-事件处理是在节点（cc.Node）中完成的。对于组件，可以通过访问节点 this.node 来注册和监听事件。监听事件可以 通过 this.node.on() 函数来注册
+```ts
+@ccclass
+export default class Child extends Parent {
+  @property(script)
+  comp: script = null;
+
+  // onLoad () {}
+  start() {
+    this.node.on('mousedown', event => {
+      console.log('Hello!');
+    });
+  }
+
+  // update (dt) {}
+}
+```
+
+Note:
+事件处理是在节点（cc.Node）中完成的。对于组件，可以通过访问节点 this.node 来注册和监听事件。监听事件可以 通过`this.node.on()` 函数来注册
 
 --
 
@@ -689,19 +770,60 @@ cc.director.preloadScene('table', function() {
 
 ## 全局系统事件
 
-全局系统事件是指与节点树不相关的各种全局事件，由 cc.systemEvent 来统一派发.
+```ts
+@ccclass
+export default class Child extends Parent {
+  @property(script)
+  comp: script = null;
+
+    onLoad () {
+        // open Accelerometer
+        cc.systemEvent.setAccelerometerEnabled(true);
+        cc.systemEvent.on(cc.SystemEvent.EventType.DEVICEMOTION, this.onDeviceMotionEvent, this);
+    },
+
+    onDestroy () {
+        cc.systemEvent.off(cc.SystemEvent.EventType.DEVICEMOTION, this.onDeviceMotionEvent, this);
+    },
+
+    onDeviceMotionEvent (event) {
+        cc.log(event.acc.x + "   " + event.acc.y);
+    },
+  // update (dt) {}
+}
+```
+
+Note:
+全局系统事件是指与节点树不相关的各种全局事件，由 `cc.systemEvent` 来统一派发.
 
 --
 
 ## 动作系统
 
-Cocos Creator 提供的动作系统源自 Cocos2d-x，API 和使用方法均一脉相承。动作系统可以在一定时间内对节点完成位移，缩放，旋转等各种动作。
-
 - 基础动作
 
 - 容器动作
 
+Note:
+Cocos Creator 提供的动作系统源自 Cocos2d-x，API 和使用方法均一脉相承。动作系统可以在一定时间内对节点完成位移，缩放，旋转等各种动作。
+
 --
+
+```ts
+this.jumpAction = cc
+  .sequence(
+    cc.spawn(cc.scaleTo(0.1, 0.8, 1.2), cc.moveTo(0.1, 0, 10)),
+    cc.spawn(cc.scaleTo(0.2, 1, 1), cc.moveTo(0.2, 0, 0)),
+    cc.delayTime(0.5),
+    cc.spawn(cc.scaleTo(0.1, 1.2, 0.8), cc.moveTo(0.1, 0, -10)),
+    cc.spawn(cc.scaleTo(0.2, 1, 1), cc.moveTo(0.2, 0, 0))
+    // 以1/2的速度慢放动画，并重复5次
+  )
+  .speed(2)
+  .repeat(5);
+```
+
+Note:
 
 - 顺序动作 cc.sequence
 
@@ -715,21 +837,56 @@ Cocos Creator 提供的动作系统源自 Cocos2d-x，API 和使用方法均一�
 
 --
 
-动作回调可以用以下的方式声明：
+```ts
+// 动作回调可以用以下的方式声明：
+const finished = cc.callFunc(this.myMethod, this, opt);
 
-```js
-var finished = cc.callFunc(this.myMethod, this, opt);
+// 缓动;
+const action = cc.scaleTo(0.5, 2, 2);
+action.easing(cc.easeIn(3.0));
 ```
 
---
-
+Note:
 缓动动作不可以单独存在，它永远是为了修饰基础动作而存在的，它可以用来修改基础动作的时间曲线，让动作有快入、缓入、快出或其它更复杂的特效。需要注意的是，只有时间间隔动作才支持缓动
 
 --
 
-## 使用计时器
+## 使用对象池
 
-在 Cocos Creator 中，我们为组件提供了方便的计时器，这个计时器源自于 Cocos2d-x 中的 cc.Scheduler，我们将它保留在了 Cocos Creator 中并适配了基于组件的使用方式。
+```ts
+@ccclass
+export default class Child extends Parent {
+  @property(script)
+  comp: script = null;
+
+  onLoad () {
+    this.enemyPool = new cc.NodePool();
+    let initCount = 5;
+    for (let i = 0; i < initCount; ++i) {
+      let enemy = cc.instantiate(this.enemyPrefab); // 创建节点
+      this.enemyPool.put(enemy); // 通过 putInPool 接口放入对象池
+    }
+  },
+  createEnemy (parentNode) {
+    let enemy = null;
+    if (this.enemyPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+        enemy = this.enemyPool.get();
+    } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+        enemy = cc.instantiate(this.enemyPrefab);
+    }
+    enemy.parent = parentNode; // 将生成的敌人加入节点树
+    enemy.getComponent('Enemy').init(); //接下来就可以调用 enemy 身上的脚本进行初始化
+}
+  onEnemyKilled (enemy) {
+    // enemy 应该是一个 cc.Node
+    this.enemyPool.put(enemy); // 和初始化时的方法一样，将节点放进对象池，这个方法会同时调用节点的 removeFromParent
+  }
+  // update (dt) {}
+}
+```
+
+Note:
+在运行时进行节点的创建(cc.instantiate)和销毁(node.destroy)操作是非常耗费性能的，因此我们在比较复杂的场景中，通常只有在场景初始化逻辑（onLoad）中才会进行节点的创建，在切换场景时才会进行节点的销毁。
 
 --
 
@@ -747,12 +904,6 @@ var finished = cc.callFunc(this.myMethod, this, opt);
 
 --
 
-## 使用对象池
-
-在运行时进行节点的创建(cc.instantiate)和销毁(node.destroy)操作是非常耗费性能的，因此我们在比较复杂的场景中，通常只有在场景初始化逻辑（onLoad）中才会进行节点的创建，在切换场景时才会进行节点的销毁。
-
---
-
 ## 模块化脚本
 
 Cocos Creator 中的 JavaScript 使用和 Node.js 几乎相同的 CommonJS 标准来实现模块化
@@ -763,15 +914,14 @@ Cocos Creator 中的 JavaScript 使用和 Node.js 几乎相同的 CommonJS 标�
 
 分包加载，即把游戏内容按一定规则拆分在几个包里，在首次启动的时候只下载必要的包，这个必要的包称为 主包，开发者可以在主包内触发下载其他子包，这样可以有效降低首次启动的消耗时间。
 
---
-
-Cocos Creator 的分包是以文件夹为单位来配置的，当我们选中一个文件夹时，在 属性检查器 中会出现文件夹的相关配置选项：
+Note:
+Cocos Creator 的分包是以文件夹为单位来配置的，当我们选中一个文件夹时，在 属性检查器 中会出现文件夹的相关配置选项
 
 --
 
 ## 插件脚本
 
-请注意：游戏脱离编辑器运行时，插件脚本将直接运行在全局作用域，脚本内不在任何函数内的局部变量都会暴露成全局变量，请小心因此引发的全局变量污染。
+游戏脱离编辑器运行时，插件脚本将直接运行在全局作用域，脚本内不在任何函数内的局部变量都会暴露成全局变量，请小心因此引发的全局变量污染。
 
 --
 
@@ -852,6 +1002,8 @@ Cocos Creator 的分包是以文件夹为单位来配置的，当我们选中一
 - [理解 组件-实体-系统](https://blog.csdn.net/i_dovelemon/article/details/25798677)
 - [独立游戏](https://www.indienova.com/)
 - [如何学好游戏编程](https://blog.csdn.net/rabbit729/article/details/7014170)
+
+---
 
 # 问题
 
