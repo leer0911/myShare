@@ -10,29 +10,43 @@ highlightTheme: 'atom-one-dark'
 
 - 开发思路
 
-- 上手体验
+- 实战
 
 <small>Created by [@LE](https://github.com/leer0911/) / [github](https://github.com/leer0911/)</small>
+
+Note:
+本次分享的目的是让大家对 H5 游戏开发有个初步的认识，并且可以独立开发一款小游戏。这边的 H5 只是泛指在现代浏览器或 HTML5 规范提供某些特性条件下，跟我们之前理解的 H5 技术没什么关系。也就是说，本次分享并不是使用 html5 、css3 等去开发游戏。
 
 ---
 
 ## 游戏引擎
 
+Note:
+早期的游戏是没有游戏引擎这个概念，都是一个游戏一套代码，逐渐把这些重用代码封装起来，这就是早期的引擎。它的任务就是尽量不用负责底层处理，而专心到游戏逻辑上来。
+
 --
 
 ### 为什么需要游戏引擎？
 
-游戏引擎实际上是用来开发游戏的一个跨平台图形（OpenGL）接口库，并提供常见功能和组件，极大地缩短了开发时间，让游戏开发变得更简单
+游戏引擎是对底层绘图接口的包装，并提供常见功能和组件，极大地缩短了开发时间，让游戏开发变得更简单
+
+<small>[基于 React 开发的俄罗斯方块](https://github.com/chvin/react-tetris)<small>
+
+Note:
+我们也可以基于 DOM 来开发一款游戏，比如基于 React 开发俄罗斯方块，但这只是体验 React 生态以及游戏算法的一种方式。( 好像也有基于 DOM 的游戏引擎，青瓷 ) 但如果你想走得更快，更远，还需要走进更为底层的图形学，对于初学者，那就是从使用并了解游戏引擎开始。
 
 --
 
 ### 游戏引擎组成
 
-通常会包含渲染器，2D/3D 图形元素，碰撞检测，物理引擎，声音，脚本，动画等模块。
+通常会包含渲染器，2D/3D 图形元素，碰撞检测，物理引擎，声音，脚本，动画，粒子等模块。
+
+Note:
+游戏引擎一般是由 `C/C++` 开发的，如果要从零开始开发游戏引擎，必须对计算机图形学，OpenGL 和 DirectX 有所了解。我们是前端，对自己好一点。先学会怎么用吧。
 
 --
 
-### 目前比较流行的 JS 游戏引擎
+### 适合前端的游戏引擎
 
 - [Cocos2d-x](http://www.cocos.com/)
 
@@ -46,17 +60,19 @@ highlightTheme: 'atom-one-dark'
 
 - [playcanvas](https://playcanvas.com/)
 
+Note:
+好比我们使用 ORM 框架来操作数据库，不用关心底层细节。对于前端开发者来说，游戏引擎应该支持 JavaScript 特性。
+
 --
 
 ### 如何选择 ?
 
 - 游戏效果呈现方式
 
-  <small>H5 游戏渲染： 2D 、3D 、VR ，2D 渲染：Dom 、Canvas 、WebGL 。</small>
-
 - 游戏复杂度
 
-  <small>这与游戏引擎能够支持的功能，提供的 API，性能等方面关系比较大。</small>
+Note:
+游戏的渲染方式一般有 2D 、3D 、VR ，所以在选择游戏引擎上可以将引擎提供的渲染方式作为选择标准。另外，2D 渲染包括 Dom 、Canvas 、WebGL ，也就是说不同的游戏引擎，提供的功能不一样。在分析游戏功能及复杂度后，就可以将游戏引擎能够支持的功能，提供的 API，性能等方面来作为选择标准。[H5 游戏开发：游戏引擎入门推荐](https://aotu.io/notes/2017/12/27/h5-game-engine-recommend/)
 
 --
 
@@ -70,7 +86,53 @@ highlightTheme: 'atom-one-dark'
 
 --
 
-### 以 Cocos2d-x 为基础开发的游戏
+- `Cocos2d-x` 是一个基于 OpenGL 的游戏引擎，因此它的绘图部分完全由 OpenGL 实现。
+
+- OpenGL 是一个基于 C 语言的三维图形 API，基本功能包含绘制几何图形、变换、着色、光照、贴图等。
+
+- 除了基本功能，OpenGL 还提供了诸如曲面图元、光栅操作、景深、shader 编程等高级功能。
+
+Note:
+另外 OpenGL 方便移植到移动端，但对于我们前端来说，可能只接触过 `WebGL`，WebGL 是基于 OpenGL ES 2.0 的 Javascript API。通过 HTML5 的 Canvas 来和 DOM 打交道。不过，只有当需要特殊图形处理时才可能接触这些底层的技术细节。这边不做过多赘述，后续会讲一个 shader 的实例。
+
+--
+
+### 游戏分类
+
+--
+
+- ACT=动作游戏
+- RPG=角色扮演
+- AVG=冒险游戏
+- PUZ=益智游戏
+- CAG=卡片游戏
+- SPG=体育游戏
+- SLG=战略游戏
+- STG=射击游戏
+- FTG=格斗游戏
+- LVG=恋爱游戏
+- TCG=养成类游戏
+
+--
+
+- RCG=赛车游戏
+- RTS=即时战略游戏
+- ETC=其他种类游戏
+- WAG=手机游戏
+- SIM=模拟经营类游戏
+- S·RPG=战略角色扮演游戏
+- A·RPG=动作角色扮演游戏
+- FPS=第一人称射击游戏
+- H-Game=成人游戏
+- MUD=泥巴游戏
+- MMORPG=大型多人在线角色扮演类
+
+Note:
+游戏类型主要分为 6 类：动作、冒险、模拟、角色扮演、休闲和其他。细分的话，太多了。另外，国内的游戏开发商主要有：腾讯，网易和其他。也有一类叫做独立游戏，是由一些游戏开发爱好者自行开发的。让我想起初中同学，读书时经常看小说，现在是腾讯签约小说。能做自己喜欢的事又能糊口也挺好的。
+
+--
+
+### Cocos2d-x 代表作
 
 ![](./img/powerbycocos.png)
 
@@ -78,13 +140,20 @@ highlightTheme: 'atom-one-dark'
 
 ![](./img/gan.jpg)
 
+Note:
+一些经典的游戏，如梦幻西游，保卫萝卜，都是基于 cocos 开发的。是时候给自己定一个小目标了，开发一个王者荣耀。直接开撸，算了，万丈高楼平地起。还是先从基础开始吧。
 --
 
-### 游戏引擎的一些基础知识
+## 引擎中基础知识了解一下
+
+![](./img/game.jpg)
+
+Note:
+引擎里面的一些基本概念都差不多。触类旁通，切换引擎的成本就只在于对引擎 API 的熟悉。
 
 --
 
-### 核心概念
+### 共通概念
 
 - 导演
 
@@ -92,21 +161,26 @@ highlightTheme: 'atom-one-dark'
 
 - 精灵
 
-- 动作
+- 脚本
 
-- 节点
-
+Note:
+不管是 cocos2d-x 还是其他引擎。都会有导演，场景，精灵，脚本等概念。好比前端做一个单页应用的话，相当于 Route，Document，DOM/Node。
 --
 
 ### 导演
 
 导演(Director)的任务是控制场景替换和转换。
 
+Note:
+有点像路由切换
 --
 
-### 场景
+### 场景 / 舞台
 
 好比电影，由不同场景或故事线组成的故事情节。
+
+Note:
+每个不同的界面
 
 --
 
@@ -116,13 +190,68 @@ highlightTheme: 'atom-one-dark'
 
 - 它有一些可以被配置的属性，比如：位置，旋转角度，缩放比例，透明度，颜色 等等。
 
+--
+
+### 脚本
+
+- 方便性
+
+- 灵活性
+
+Note:
+游戏中为什么要用脚本呢！最简单解释就是灵活性好。
+
+--
+
+```c++
+auto dirs = Director::getInstance();
+Size visibleSize = dirs->getVisibleSize();
+
+auto myScene = Scene::create();
+
+auto label1 = Label::createWithTTF("My Game", "Marker Felt.ttf", 36);
+label1->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+
+myScene->addChild(label1);
+
+auto sprite1 = Sprite::create("mysprite.png");
+sprite1->setPosition(Vec2(100, 100));
+
+myScene->addChild(sprite1);
+```
+
+Note:
+看到这个代码的时候，我差点忘记自己是一个前端! 这段代码是用来创建一个场景，场景里面有一个标签和一个精灵。这虽然很简单，但这却是 c++。即便 cocos2d-x 支持 JavaScript，但官方文档对此并不友好。
+
+--
+
+## 我们是前端 !
+
+Note:
+前端近几年的发展让我们养成了查看文档的好习惯，而且是查看好的文档。如果是这样的生态，让一个前端去开发游戏。我选择去切图 !
+--
+
+### 成就你的梦想 ! 让游戏开发变得
+
+# 简单!
+
+Note:
+看到 cocos 官网的这句标语，我就有要求了，
+
+- 我要友好的文档，开发所见即所得。
+- 我要结合 chrome 调试，用 vscode 开发。
+- 我要组件化开发，数据驱动
+
+--
+
+![](./img/ccc.png)
+
 ---
 
 ## 开发工具
 
---
-
-开发工具应该是一个完整的游戏开发解决方案，并提供能让你更快速开发游戏所需要的各种图形界面工具
+Note:
+开发工具应该是一个完整的游戏开发解决方案，最好有个友好的 GUI。
 
 --
 
@@ -133,6 +262,9 @@ highlightTheme: 'atom-one-dark'
 - 包含从设计、开发、预览、调试到发布的整个工作流所需的全功能一体化编辑器
 
 - 目前支持发布游戏到 Web、iOS、Android、各类"小游戏"、PC 客户端等平台，真正实现一次开发，全平台运行。
+
+Note:
+cocos creator 为前端而生。
 
 --
 
@@ -495,11 +627,11 @@ cc.director.preloadScene('table', function() {
 
 --
 
-- 'position-changed'	当位置属性修改时
-- 'rotation-changed'	当旋转属性修改时
-- 'scale-changed'	当缩放属性修改时
-- 'size-changed'	当宽高属性修改时
-- 'anchor-changed'	当锚点属性修改时
+- 'position-changed' 当位置属性修改时
+- 'rotation-changed' 当旋转属性修改时
+- 'scale-changed' 当缩放属性修改时
+- 'size-changed' 当宽高属性修改时
+- 'anchor-changed' 当锚点属性修改时
 
 --
 
@@ -607,7 +739,6 @@ Cocos Creator 的分包是以文件夹为单位来配置的，当我们选中一
 
 - Sliced Sprite（九宫格精灵图）则提供了可任意指定尺寸的图像，同样可以满足各式各样的对齐要求，在任何屏幕分辨率上都显示高精度的图像。
 
-
 --
 
 # Tips
@@ -664,7 +795,11 @@ Cocos Creator 的分包是以文件夹为单位来配置的，当我们选中一
 # 参考
 
 - [H5 游戏开发：游戏引擎入门推荐](https://aotu.io/notes/2017/12/27/h5-game-engine-recommend/)
+- [基于 React 开发的俄罗斯方块](https://github.com/chvin/react-tetris)
+- [如何从零开始写一个简单的游戏引擎？](https://www.zhihu.com/question/25668562)
 - [理解 组件-实体-系统](https://blog.csdn.net/i_dovelemon/article/details/25798677)
+- [独立游戏](https://www.indienova.com/)
+- [如何学好游戏编程](https://blog.csdn.net/rabbit729/article/details/7014170)
 
 # 问题
 
