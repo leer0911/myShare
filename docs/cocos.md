@@ -1,6 +1,6 @@
 ---
 highlightTheme: 'atom-one-dark'
-customTheme: "my-theme"
+customTheme: 'my-theme'
 ---
 
 # H5 游戏开发
@@ -12,7 +12,7 @@ Note:
 
 --
 
-## 提纲
+## 概要
 
 - 游戏引擎
 
@@ -33,12 +33,12 @@ Note:
 
 ## 为什么需要游戏引擎？
 
-- 无需接触底层绘图接口，降低学习成本
+- 无需接触底层绘图接口，降低学习成本
 
 - 提供常见功能和组件，提升开发效率
 
 Note:
-我们完全可以不用引擎，直接基于 DOM 来开发一款游戏，比如基于 React 开发俄罗斯方块，但这只是体验 React 生态以及游戏开发思路的一种方式。如果你想走得更快，更远，建议还是从使用并了解游戏引擎开始。
+我们完全可以不用引擎，直接基于 DOM 来开发一款游戏，比如基于 React 开发俄罗斯方块，但这只是体验 React 生态以及游戏开发思路的一种方式。如果你想走得更快，更远，建议还是从使用并了解游戏引擎开始。
 
 --
 
@@ -47,7 +47,7 @@ Note:
 通常会包含渲染器，2D/3D 图形元素，碰撞检测，物理引擎，声音，脚本，动画，粒子等模块。
 
 Note:
-游戏引擎一般是由 `C/C++` 开发的，如果要从零开始开发游戏引擎，必须对计算机图形学，OpenGL 和 DirectX 有所了解。我们是前端，对自己好一点。先学会怎么用吧。不然下次就得分享生发心得了。
+游戏引擎一般是由 `C/C++` 开发的，如果要从零开发游戏引擎，必须对计算机图形学，OpenGL 和 DirectX 有所了解。( 我们是前端，对自己好一点。先学会怎么用吧。不然下次就得分享生发心得了。 )
 
 --
 
@@ -66,7 +66,7 @@ Note:
 - [playcanvas](https://playcanvas.com/)
 
 Note:
-就好比我们使用 ORM 框架来操作数据库，无需关心 SQL 语句或其他底层细节。对于前端开发者来说，游戏引擎应该支持浏览器环境 ，并且可以用 Js 去调用底层接口。
+就好比我们使用 ORM 框架来操作数据库，无需关心 SQL 语句或其他底层细节。对于前端开发者来说，游戏引擎应该支持浏览器环境 ，并且可以用 Js 去调用底层接口。
 
 --
 
@@ -83,14 +83,6 @@ Note:
 
 ## Cocos2d-x
 
-- Cocos2d-x 是 MIT 许可证下发布的一款功能强大的开源游戏引擎。
-
-- 允许开发人员使用 C++、Javascript 及 Lua 三种语言来进行游戏开发。
-
-- 支持所有常见平台，包括 iOS、Android、Windows、macOS、Linux。
-
---
-
 - `Cocos2d-x` 是一个基于 OpenGL 的游戏引擎，因此它的绘图部分完全由 OpenGL 实现。
 
 - OpenGL 是一个基于 C 语言的三维图形 API，基本功能包含绘制几何图形、变换、着色、光照、贴图等。
@@ -99,6 +91,16 @@ Note:
 
 Note:
 另外 OpenGL 方便移植到移动端，但对于我们前端来说，可能只接触过 `WebGL`，WebGL 是基于 OpenGL ES 2.0 的 Javascript API。通过 HTML5 的 Canvas 来和 DOM 打交道。不过，目前看来，只有需要特殊滤镜的情况才可能接触这些底层的技术细节。这边不做过多赘述，后续会讲一个 shader 的 Demo。
+
+--
+
+### 特点
+
+- Cocos2d-x 是 MIT 许可证下发布的一款功能强大的开源游戏引擎。
+
+- 允许开发人员使用 C++、Javascript 及 Lua 三种语言来进行游戏开发。
+
+- 支持所有常见平台，包括 iOS、Android、Windows、macOS、Linux。
 
 --
 
@@ -127,7 +129,7 @@ Note:
 ![](./img/powerbycocos.png)
 
 Note:
-一些经典的游戏，如梦幻西游，保卫萝卜，都是基于 cocos 开发的。
+一些经典的游戏，如梦幻西游，保卫萝卜都是基于 cocos 开发的。
 
 --
 
@@ -187,7 +189,7 @@ Note:
 - 它有一些可以被配置的属性，比如：位置，旋转角度，缩放比例，透明度，颜色 等等。
 
 Note:
-这些其实都只是术语，有个大概的了解即可，不必纠结其名称。
+这些其实都只是术语，有个大概的了解即可，不必纠结其名称。
 
 --
 
@@ -199,8 +201,8 @@ Note:
 
 Note:
 游戏中为什么要用脚本呢！最简单解释就是灵活性好。
-虽然只是几个简单的概念，但就仅仅开发具备这些功能的游戏引擎也是极难的。
-对于cocos2d-x 我们就先了解这么多，其他如物理引擎，碰撞检测，有兴趣的可以去了解下。
+虽然只是几个简单的概念，但就仅仅开发具备这些功能的游戏引擎也是极难的。
+对于 cocos2d-x 我们就先了解这么多，其他如物理引擎，碰撞检测，有兴趣的可以去了解下。
 
 --
 
@@ -277,49 +279,32 @@ cocos creator 为前端而生
 
 ## 界面
 
-- 层级管理器
-- 资源管理器
-- 属性检查器
-- 场景编辑器
-- 动画编辑器
-- 控制台
+![](./img/cocos.png)
 
 --
 
-## 菜单
+## 人员配置
 
-- 文件
-- 编辑
-- 节点
-- 组件
-- 项目
-- 面板
-- 布局
-- 扩展
-- 开发者
-- 帮助
+- 美术
 
---
-
-## 常用快捷键
-
-- 移动节点 position (W)
-- 旋转节点 rotation (E)
-- 缩放节点 scale (R)
-- 矩形变换工具修改节点 size 和 position (T)
-
---
-
-## 工作流程
-
-- 美术和策划
+- 策划
 
 - 程序员
 
 Note:
-游戏公司一般会有美术和策划，程序员。流程也有所分别，但本次分享不会分太细。
+游戏公司一般会有美术，策划，程序员。
+
+并且有具体分工，美术一般负责界面的设计与搭建，这样就不会扯皮像素级别的问题了。
+
+程序员主要负责游戏逻辑的编写。
+
+策划负责游戏玩法设计，由于 cocos creator 提供了属性配置功能，所以策划也可以通过它来修改一些游戏配置。
+
+所以，如果美术，策划，程序员都会使用 cocos creator，将会极大地降低沟通成本。
 
 --
+
+## 工作流程
 
 ![](./img/cocos-workflow-user.jpg)
 
@@ -354,7 +339,7 @@ Texture 是游戏中绝大部分图像渲染的数据源。而 SpriteFrame 是 T
 - Cocos Creator 使用的图集资源由 plist 和 png 文件组成。
 
 Note:
-就像前端的雪碧图，但与雪碧图不一样的是。ccc 中的图集由 plist 和 png 组成。好比用 gulp 自动生成的雪碧图和 css。
+就像前端的雪碧图，但与雪碧图不一样的是。ccc 中的图集由 plist 和 png 组成。好比用 gulp 自动生成的雪碧图和 css。
 
 --
 
@@ -495,20 +480,20 @@ cocos creator 下的坐标系统跟浏览器存在差别
 Note:
 世界坐标系也叫做绝对坐标系，在 Cocos Creator 游戏开发中表示场景空间内的统一坐标体系，「世界」就用来表示我们的游戏场景。
 本地坐标系也叫相对坐标系，是和节点相关联的坐标系。每个节点都有独立的坐标系，当节点移动或改变方向时，和该节点关联的坐标系将随之移动或改变方向。
-
---
-
 Cocos Creator 中的 节点（Node） 之间可以有父子关系的层级结构，我们修改节点的位置（Position） 属性设定的节点位置是该节点相对于父节点的本地坐标系而非世界坐标系。最后在绘制整个场景时 Cocos Creator 会把这些节点的本地坐标映射成世界坐标系坐标。
 
 --
 
 ## 锚点（Anchor）
 
+![](./img/anchor.png)
+
+Note:
+
 - 锚点（Anchor） 是节点的另一个重要属性，它决定了节点以自身约束框中的哪一个点作为整个节点的位置。我们选中节点后看到变换工具出现的位置就是节点的锚点位置。
 
 - 锚点位置确定后，所有子节点就会以 锚点所在位置 作为坐标系原点，注意这个行为和 cocos2d-x 引擎中的默认行为不同，是 Cocos Creator 坐标系的特色！
 
-Note:
 结合 `transform-origin` 来理解比较好
 
 --
@@ -544,9 +529,11 @@ Note:
 
 ## 脚本相关
 
-- Cocos Creator 的脚本主要是通过扩展组件来进行开发的
+Cocos Creator 的脚本主要是通过**扩展组件**来进行开发的
 
-- 在组件脚本的编写过程中，可以通过声明属性，将脚本中需要调节的变量映射到 属性检查器（Properties） 中
+Note:
+
+- 在组件脚本的编写过程中，可以通过声明属性，将脚本中需要调节的变量映射到属性检查器（Properties） 中
 
 - 可以通过注册特定的回调函数，来帮助你初始化，更新甚至销毁节点。
 
@@ -562,7 +549,15 @@ Note:
 - onEnable
 - onDisable
 
+Note:
+Cocos Creator 为组件脚本提供了生命周期的回调函数。用户只要定义特定的回调函数，Creator 就会在特定的时期自动执行相关脚本，用户不需要手工调用它们。
+
+--
+
 ## 常用脚本
+
+Note:
+cocos creator 提供的 API 还是比较多的，刚开始建议用到的时候再查找一下，这里简单过下常用的。
 
 --
 
@@ -576,7 +571,7 @@ export default class Child extends Parent {
 
   // onLoad () {}
   start() {
-    this.node;
+    const node = this.node;
   }
 
   // update (dt) {}
@@ -902,22 +897,31 @@ Note:
 
 ## 模块化脚本
 
-Cocos Creator 中的 JavaScript 使用和 Node.js 几乎相同的 CommonJS 标准来实现模块化
+- Cocos Creator 中的 JavaScript 使用和 Node.js 几乎相同的 CommonJS 标准来实现模块化
+
+- ES6 或 TS
 
 --
 
 ## 代码分包加载
 
-分包加载，即把游戏内容按一定规则拆分在几个包里，在首次启动的时候只下载必要的包，这个必要的包称为 主包，开发者可以在主包内触发下载其他子包，这样可以有效降低首次启动的消耗时间。
+![](./img/zb.png)
 
 Note:
+分包加载，即把游戏内容按一定规则拆分在几个包里，在首次启动的时候只下载必要的包，这个必要的包称为 主包，开发者可以在主包内触发下载其他子包，这样可以有效降低首次启动的消耗时间。
+
 Cocos Creator 的分包是以文件夹为单位来配置的，当我们选中一个文件夹时，在 属性检查器 中会出现文件夹的相关配置选项
 
 --
 
 ## 插件脚本
 
-游戏脱离编辑器运行时，插件脚本将直接运行在全局作用域，脚本内不在任何函数内的局部变量都会暴露成全局变量，请小心因此引发的全局变量污染。
+![](./img/cj.png)
+
+Note:
+比如我们编写了调用客户端协议的脚本，那就可以通过插件的形式来引入。
+
+但是要注意，游戏脱离编辑器运行时，插件脚本将直接运行在全局作用域，脚本内不在任何函数内的局部变量都会暴露成全局变量，请小心因此引发的全局变量污染。
 
 --
 
@@ -925,68 +929,144 @@ Cocos Creator 的分包是以文件夹为单位来配置的，当我们选中一
 
 摄像机是玩家观察游戏世界的窗口，场景中至少需要有一个摄像机，也可以同时存在多个摄像机。创建场景时，Creator 会默认创建一个名为 Main Camera 的摄像机，作为这个场景的主摄像机。
 
+Note:
+摄像机的应用在后续会深入介绍。
+
 --
 
 ## 多分辨率适配方案
 
-- Canvas（画布）组件随时获得设备屏幕的实际分辨率并对场景中所有渲染元素进行适当的缩放。
+- UI 节点都挂在 canvas 下。
 
-- Widget（对齐挂件）放置在渲染元素上，能够根据需要将元素对齐父节点的不同参考位置。
+- Widget（对齐挂件）放置在渲染元素上，根据需要将元素对齐父节点的不同参考位置。
 
-- Label（文字）组件内置了提供各种动态文字排版模式的功能，当文字的约束框由于 Widget 对齐要求发生变化时，文字会根据需要呈现完美的排版效果。
+![](./img/widget.png)
 
-- Sliced Sprite（九宫格精灵图）则提供了可任意指定尺寸的图像，同样可以满足各式各样的对齐要求，在任何屏幕分辨率上都显示高精度的图像。
+Note:
+Canvas（画布）组件随时获得设备屏幕的实际分辨率并对场景中所有渲染元素进行适当的缩放。
+
+--
+
+![](./img/label.png)
+![](./img/sprite.png)
+
+Note:
+另外 cocos creator 提供的 Label（文字）组件内置了各种动态文字排版功能，文字会根据需要呈现完美的排版效果。
+
+Sliced Sprite（九宫格精灵图）则提供了可任意指定尺寸的图像，同样可以满足各式各样的对齐要求，在任何屏幕分辨率上都显示高精度的图像。
 
 --
 
 # Tips
 
-- 使用 Canvas 作为渲染根节点，Canvas 能提供多分辨率自适应的缩放功能
+- 使用 Canvas 作为渲染根节点，Canvas 能提供多分辨率**自适应的缩放功能**
 
-- 逻辑节点放置在场景根层级，和 Canvas 节点并列
+- 逻辑节点放置在场景根层级，**和 Canvas 节点并列**
 
-- 对齐节点
+- 可以将属性的默认值由 null 改为数组[]，这样你就能在属性检查器中**同时设置多个对象**。
 
-- 可以将属性的默认值由 null 改为数组[]，这样你就能在 属性检查器 中同时设置多个对象。
+- 注意: **在 cc.callFunc 中不应该停止自身动作**，由于动作是不能被立即删除，如果在动作回调中暂停自身动作会引发一系列遍历问题，导致更严重的 bug。
 
-- 注意：目前已经不建议直接使用 cc.eventManager 来注册任何事件，cc.eventManager 的用法也不保证持续性，有可能随时被修改
+- ...
 
-- 注意: 在 cc.callFunc 中不应该停止自身动作，由于动作是不能被立即删除，如果在动作回调中暂停自身动作会引发一系列遍历问题，导致更严重的 bug。
-
+Note:
+调用一个节点的 removeFromParent 后，它不一定就能完全从内存中释放，因为有可能由于一些逻辑上的问题，导致程序中仍然引用到了这个对象。因此如果一个节点不再使用了，请直接调用它的 destroy 而不是 removeFromParent。destroy 不但会激活组件上的 onDestroy，还会降低内存泄露的几率，同时减轻内存泄露时的后果。
 --
 
-- 调用一个节点的 removeFromParent 后，它不一定就能完全从内存中释放，因为有可能由于一些逻辑上的问题，导致程序中仍然引用到了这个对象。因此如果一个节点不再使用了，请直接调用它的 destroy 而不是 removeFromParent。destroy 不但会激活组件上的 onDestroy，还会降低内存泄露的几率，同时减轻内存泄露时的后果。
-
 --
-
-目前 cc.loader 的设计实际上是依赖于用户根据游戏逻辑管理资源，用户可以决定在某一时刻不再需要某些资源以及它依赖的资源，立即将它们在 cc.loader 中的缓存释放。
-
----
 
 ## 比较重要 API
 
+- cc.game
 - cc.director
 - cc.Node
+- cc.instantiate
+- cc.NodePool
+- cc.Prefab
+- cc.loader
 - cc.Component
+- cc.Event
+
+--
+
 - cc.Asset
 - cc.Texture2D
 - cc.SpriteFrame
 - cc.AnimationClip
-- cc.Prefab
 - cc.ActionInterval
 - cc.ActionInstant
-- cc.instantiate
-- cc.game
-- cc.loader
-- cc.Event
 - cc.ActionEase
-- cc.NodePool
+
+--
+
+# 性能
+
+![](./img/h.jpg)
+
+--
+
+1. 雪碧图，图片按尺寸加载
+
+2. prefab 和 对象池
+
+3. 合理创建节点，控制节点数量
+
+4. 视频和音频的处理独立出来一个单独的进程处理
+
+5. Cocos Creator 2.0 性能至上，创作为先
+
+6. CPU 瓶颈通常跟 Draw call 数量和你的游戏循环的复杂度相关
+
+7. ...
 
 ---
 
-# 性能建议
+# 开发思路
 
-- 在制作场景时应该避免出现大量无意义的节点，应该尽可能合并相同功能的节点。
+--
+
+![](./img/gan.jpg)
+
+--
+
+## 核心思想
+
+- 面向对象 / 组件化
+
+- 数据驱动
+
+Note:
+这个应该适用于前端开发的很多领域，首先，一切皆对象。对象，都具备属性和方法。一个游戏角色就是一个对象，但在 cocos creator 游戏开发中，比较少用到继承。更多的是之前讲到过的组件式开发。
+
+另外，就是应该有数据驱动的思想，换句话说，应该理解游戏中的状态机。这个是一个比较深的话题，以后有机会再分享。
+
+--
+
+## 各有套路
+
+Note:
+
+--
+
+## 六边形消除类
+
+![](./img/hex.png)
+
+--
+
+## 答题类
+
+![](./img/iqpk.png)
+
+---
+
+# 实战
+
+--
+
+- [2048](https://test-bfe.meiyou.com/game/2048/)
+- [六边形消除游戏](https://test-bfe.meiyou.com/game/hex/)
+- [头脑吃鸡](https://test-bfe.meiyou.com/game/iqpk/)
 
 ---
 
@@ -998,9 +1078,18 @@ Cocos Creator 的分包是以文件夹为单位来配置的，当我们选中一
 - [理解 组件-实体-系统](https://blog.csdn.net/i_dovelemon/article/details/25798677)
 - [独立游戏](https://www.indienova.com/)
 - [如何学好游戏编程](https://blog.csdn.net/rabbit729/article/details/7014170)
+- [官方性能优化](https://zilongshanren.com/blog/2016-07-24-optimize-graphics-performance-of-cocos2d-x-games.html)
+- [H5 游戏开发](https://aotu.io/cates/H5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/index.html)
+
+--
+
+- [六边形网格](https://indienova.com/indie-game-development/hex-map-part-1/)
+- [2D 横版游戏摄像机运镜原理与实践](https://indienova.com/indie-game-development/scroll_back_the_theory_and_practice_of_cameras_in_sidescrollers-ph/)
+- [A 星算法详解](https://blog.csdn.net/zhulichen/article/details/78786493)
+- [如何使 A \*寻路适应 2D 网格平台：理论](https://indienova.com/indie-game-development/how-to-adapt-a-pathfinding-to-a-2d-grid-based-platformer-theory/)
+- [捕鱼类游戏计算方式的设计思路](http://www.cocoachina.com/game/20151016/13785.html)
+- [状态机](https://indienova.com/indie-game-development/finite-state-machines/)
 
 ---
 
-# 问题
-
-- 为什么属性管理器里面可以直接设置节点?
+# Thanks!

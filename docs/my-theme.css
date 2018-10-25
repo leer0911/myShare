@@ -1,11 +1,20 @@
-body{
-    background: #282c34;
+strong {
+  color: #d19a66 !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #d19a66 !important;
 }
 
-strong,h1,h2,h3,h4,h5,h6{
-    color:#42affa !important
+.reveal pre code {
+  padding: 20px;
 }
 
-.reveal pre code{
-    padding:20px
+body {
+  /* background: #282c34 url('./img/bg.jpg'); */
+  background: #282c34;
 }
